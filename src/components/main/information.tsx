@@ -53,14 +53,14 @@ export default function Information() {
     return (
         <div className="py-8">
             <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">Our Services</h2>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-2 sm:text-left md:grid-cols-3">
                 {services.map((service, index) => (
                     <div 
                         key={index} 
                         className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
                     >
                         <div className="p-5">
-                            <div className="flex items-center mb-3">
+                            <div className="flex items-center justify-center sm:justify-start mb-3">
                                 <div className="p-2 bg-blue-50 rounded-lg mr-3">
                                     {service.icon}
                                 </div>

@@ -32,11 +32,11 @@ export default function carosul() {
   return (
     <div className="w-full">
       {/* Carousel Container - fixed width */}
-      <div className="relative w-full h-52 md:h-72 bg-gradient-to-r from-gray-600 to-gray-300 rounded-lg shadow-lg">
+      <div className="relative w-full h-52 md:h-72 bg-gradient-to-r from-[#9dabda] via-[#c6c8d2] to-[#e3e4e9] rounded-lg shadow-lg">
         
         {/* Text Content - with padding and overflow handling */}
         <div className="px-16 py-8 text-center h-full flex items-center justify-center">
-          <div className="text-white text-xl font-medium leading-relaxed max-h-48 overflow-y-auto">
+          <div className="text-gray-600 text-xl font-medium leading-relaxed max-h-48 overflow-y-auto">
             {slides[currentSlide]}
           </div>
         </div>

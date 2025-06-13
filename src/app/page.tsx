@@ -3,6 +3,7 @@ import Carosul from "@/components/main/carosul";
 import Flags from "@/components/main/flags";
 import Information from "@/components/main/information";
 import Appointment from "@/components/main/appointment";
+import Seminars from "@/components/main/seminars";
 export default function Home() {
   return (
     <div className="min-h-screen py-2">
@@ -13,9 +14,14 @@ export default function Home() {
       <div className="px-2 pt-2">
         <Information/>
       </div>
-      <div>
+      <div className="flex flex-col md:flex-row my-2">
+        <div className="basis-[70%]">
         <Appointment/>
-      </div>
+        </div>
+        <div className="basis-[30%]">
+          <Seminars/>
+        </div>
+    </div>
     </div>
   );
 }
