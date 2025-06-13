@@ -1,8 +1,11 @@
-import Logo from "./flight-takeoff-svgrepo-com.png";
-import Drawer from "./bars-svgrepo-com.png"
+import Logo from "./flight.png";
+import Drawer from "./bars.png"
+import Cross from "./cross.png"
+
 const headerImages = {
     logo: Logo,
-    drawer: Drawer
+    drawer: Drawer,
+    cross: Cross,
 }
 
 export default headerImages;

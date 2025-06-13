@@ -44,7 +44,7 @@ export default function Appointment() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-md">
+        <div className="max-w-4xl mx-auto p-6 ">
             <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">Register here, Book Appointment</h1>
             
             {/* Attach the handleSubmit function to the form's onSubmit event */}

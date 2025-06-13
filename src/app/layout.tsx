@@ -18,8 +18,8 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <Layout>          {/* ← Your custom component */}
-          {children}      {/* ← Your pages go here */}
+        <Layout>         
+          {children}      
         </Layout>
       </body>
     </html>

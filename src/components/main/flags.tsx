@@ -24,11 +24,11 @@ export default function Flags() {
     }, [])
     
     return (
-        <div className="relative w-full rounded-lg bg-gradient-to-l from-gray-600 to-gray-300">
-            <h2 className="text-xl font-bold text-center text-white pt-2">Countries</h2>
+        <div className="relative w-full rounded-lg md:bg-gradient-to-r md:from-[#e3e4e9] md:via-[#c6c8d2] md:to-[#9dabda]">
+            <h2 className="text-xl font-bold text-center text-black md:text-white pt-2">Countries</h2>
             
             <div className="relative h-40 md:h-56 overflow-hidden rounded-lg">
-                <div className="grid grid-cols-4 md:grid-cols-2 h-full items-center justify-center gap-1 p-2">
+                <div className="grid grid-cols-4 md:grid-cols-2 h-full items-center justify-center gap-3 md:p-2">
                     <div className="w-full h-24 rounded-lg flex items-center justify-center">
                         <Image src={countries[currentSlide][0]} alt="flag" width={150} height={150} />
                     </div>
@@ -47,7 +47,7 @@ export default function Flags() {
                 </div>
             </div>
             
-            <div className="flex justify-center mt-3 pb-3 space-x-3">
+            <div className="flex justify-center md:mt-3 md:pb-3 space-x-3">
                 {countries.map((_, index) => (
                     <button 
                         key={index}
