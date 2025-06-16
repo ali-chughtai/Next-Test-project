@@ -4,6 +4,8 @@ import Flags from "@/components/main/flags";
 import Information from "@/components/main/information";
 import Appointment from "@/components/main/appointment";
 import Seminars from "@/components/main/seminars";
+import Packages from "@/components/main/packages";
+import Profiles from "@/components/main/profiles";
 export default function Home() {
   return (
     <div className="min-h-screen py-2">
@@ -14,13 +16,19 @@ export default function Home() {
       <div className="px-2 pt-2">
         <Information/>
       </div>
-      <div className="flex flex-col md:flex-row my-2">
+      <div className="flex flex-col flex-col-reverse lg:flex-row lg:items-center  my-2">
         <div className="basis-[70%]">
         <Appointment/>
         </div>
         <div className="basis-[30%]">
           <Seminars/>
         </div>
+    </div>
+    {/* <div>
+      <Packages/>
+    </div> */}
+    <div>
+      <Profiles/>
     </div>
     </div>
   );
