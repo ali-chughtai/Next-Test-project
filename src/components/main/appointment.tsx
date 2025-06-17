@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState,useRef } from "react";
 import Packages from "./packages";
 import { saveAppointment } from "@/app/actions";
 export default function Appointment() {
@@ -15,9 +15,7 @@ export default function Appointment() {
   const [bankAccountNumber, setBankAccountNumber] = useState("");
   const [receiptFile, setReceiptFile] = useState<File | null>(null);
   const [receiptFileName, setReceiptFileName] = useState("");
-
   const [errors, setErrors] = useState<Record<string, string>>({});
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{
     success?: boolean;
@@ -53,28 +51,28 @@ export default function Appointment() {
 
     if (!education.trim()) {
       newErrors.education = "Education is required";
-    } else if (!/^[A-Za-z0-9\s\-\&]{3,30}$/.test(education)) {
+    } else if (!/^[A-Za-z0-9\s\-\&]{3,50}$/.test(education)) {
       newErrors.education =
         "Education can have alphabets, numbers, and special characters - & and spaces";
     }
 
     if (!lastDegreeName.trim()) {
       newErrors.lastDegreeName = "Last degree name is required";
-    } else if (!/^[A-Za-z0-9\s\-\&]{3,30}$/.test(lastDegreeName)) {
+    } else if (!/^[A-Za-z0-9\s\-\&]{3,50}$/.test(lastDegreeName)) {
       newErrors.lastDegreeName =
         "Last degree name can have alphabets, numbers, and special characters - & and spaces";
     }
 
     if (!university.trim()) {
       newErrors.university = "University is required";
-    } else if (!/^[A-Za-z0-9\s\-\&]{3,30}$/.test(university)) {
+    } else if (!/^[A-Za-z0-9\s\-\&]{3,50}$/.test(university)) {
       newErrors.university =
         "University can have alphabets, numbers, and special characters - & and spaces";
     }
 
     if (!scholarshipCountry.trim()) {
       newErrors.scholarshipCountry = "Scholarship country is required";
-    } else if (!/^[A-Za-z0-9\s\-\&]{3,30}$/.test(scholarshipCountry)) {
+    } else if (!/^[A-Za-z0-9\s\-\&]{3,50}$/.test(scholarshipCountry)) {
       newErrors.scholarshipCountry =
         "Scholarship country can have alphabets, numbers, and special characters - & and spaces";
     }
@@ -367,8 +365,8 @@ export default function Appointment() {
                 setErrors(restErrors);
               }
             }}
-            maxLength={30}
-            pattern="^[A-Za-z0-9\s\-\&]{3,30}$"
+            maxLength={50}
+            pattern="^[A-Za-z0-9\s\-\&]{3,50}$"
             onInvalid={(e) => {
               e.currentTarget.setCustomValidity(
                 "Education can have Alphabets and numbers, Special characters allowed are - & whitespace"
@@ -398,8 +396,8 @@ export default function Appointment() {
                 setErrors(restErrors);
               }
             }}
-            maxLength={30}
-            pattern="^[A-Za-z0-9\s\-\&]{3,30}$"
+            maxLength={50}
+            pattern="^[A-Za-z0-9\s\-\&]{3,50}$"
             onInvalid={(e) => {
               e.currentTarget.setCustomValidity(
                 "University can have Alphabets and numbers, Special characters allowed are - & whitespace"
@@ -429,8 +427,8 @@ export default function Appointment() {
                 setErrors(restErrors);
               }
             }}
-            maxLength={30}
-            pattern="^[A-Za-z0-9\s\-\&]{3,30}$"
+            maxLength={50}
+            pattern="^[A-Za-z0-9\s\-\&]{3,50}$"
             onInvalid={(e) => {
               e.currentTarget.setCustomValidity(
                 "University can have Alphabets and numbers, Special characters allowed are - & whitespace"
@@ -460,8 +458,8 @@ export default function Appointment() {
                 setErrors(restErrors);
               }
             }}
-            maxLength={30}
-            pattern="^[A-Za-z0-9\s\-\&]{3,30}$"
+            maxLength={50}
+            pattern="^[A-Za-z0-9\s\-\&]{3,50}$"
             onInvalid={(e) => {
               e.currentTarget.setCustomValidity(
                 "Scholarship Country can have Alphabets and numbers, Special characters allowed are - & whitespace"
@@ -579,7 +577,7 @@ export default function Appointment() {
           onClick={handleSubmit}
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           {isSubmitting ? "Submitting..." : "Submit Application"}
         </button>
