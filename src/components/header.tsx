@@ -6,6 +6,7 @@ import Image from "next/image";
 import Drawer from "./main/drawer";
 import { useState, useEffect } from "react";
 import Signature from "./signature/signature";
+import scrollToSection from "@/app/utils/scrollToSection";
 
 // Rename to Header (capitalized) to follow React component naming convention
 export default function Header() {
@@ -28,16 +29,6 @@ export default function Header() {
         // Cleanup event listener
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-    const scrollToSection = (id: string) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    };
 
     return(
         <header className=" rounded-b-lg flex justify-between items-center py-3 border-b-1 bg-gradient-to-r from-[#1B223C] via-[#0E1326] to-[#161C35]" >
