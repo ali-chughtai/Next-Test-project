@@ -1,8 +1,21 @@
-import { Calendar, Users, DollarSign, Star, BookOpen, Globe, Award, Clock, FileText, Headphones, Briefcase, GraduationCap } from "lucide-react";
+import {
+  Calendar,
+  Users,
+  DollarSign,
+  Star,
+  BookOpen,
+  Globe,
+  Award,
+  Clock,
+  FileText,
+  Headphones,
+  Briefcase,
+  GraduationCap,
+} from "lucide-react";
 
 export default function Seminars() {
   return (
-    <div className="flex flex-col gap-6 p-6 items-center justify-center text-black h-full bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden m-2 sm:mr-10">
+    <div className="flex flex-col gap-6 p-6 items-center justify-center text-black h-full bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden ">
       <div className="flex flex-col items-center gap-1">
         <div className="flex items-center gap-2">
           <Calendar className="text-blue-600 w-6 h-6" />
