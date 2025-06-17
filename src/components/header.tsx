@@ -7,8 +7,8 @@ import Drawer from "./main/drawer";
 import { useState, useEffect } from "react";
 import Signature from "./signature/signature";
 
-
-export default function header() {
+// Rename to Header (capitalized) to follow React component naming convention
+export default function Header() {
     const [drawerOpen, setDrawerOpen] = useState(false)
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen)
@@ -25,6 +25,8 @@ export default function header() {
         
         handleResize();
         
+        // Cleanup event listener
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const scrollToSection = (id: string) => {
