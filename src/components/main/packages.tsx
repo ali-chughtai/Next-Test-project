@@ -11,6 +11,7 @@ export interface PackagesRef {
 const Packages = forwardRef<PackagesRef>((props, ref) => {
   const [day, setDay] = useState("Saturday");
   const [selectedTimezone, setSelectedTimezone] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
 
   const countryTimeZones = [
@@ -38,8 +39,16 @@ const Packages = forwardRef<PackagesRef>((props, ref) => {
 
   useEffect(() => {
     const storedPackage = localStorage.getItem("package");
+    const storedCountry = localStorage.getItem("selectedCountry");
+    const storedTimezone = localStorage.getItem("timezone");
+    
     if (storedPackage) {
       setSelectedPackage(storedPackage);
+    }
+    
+    if (storedCountry && storedTimezone) {
+      setSelectedCountry(storedCountry);
+      setSelectedTimezone(storedTimezone);
     }
   }, []);
 
@@ -47,7 +56,12 @@ const Packages = forwardRef<PackagesRef>((props, ref) => {
     resetPackagesState: () => {
       setDay("Saturday");
       setSelectedTimezone("");
+      setSelectedCountry("");
       setSelectedPackage(null);
+      localStorage.removeItem("day");
+      localStorage.removeItem("package");
+      localStorage.removeItem("timezone");
+      localStorage.removeItem("selectedCountry");
     },
   }));
 
@@ -143,19 +157,22 @@ const Packages = forwardRef<PackagesRef>((props, ref) => {
             <div className="relative w-full md:w-auto">
               <select
                 id="timezone-select"
-                value={selectedTimezone}
+                value={`${selectedCountry}|${selectedTimezone}`}
                 onChange={(e) => {
-                  setSelectedTimezone(e.target.value);
-                  localStorage.setItem("timezone", e.target.value);
+                  const [country, timezone] = e.target.value.split('|');
+                  setSelectedCountry(country);
+                  setSelectedTimezone(timezone);
+                  localStorage.setItem("selectedCountry", country);
+                  localStorage.setItem("timezone", timezone);
                 }}
                 className="block w-full md:w-64 rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 appearance-none border"
               >
                 <option value="" disabled>
                   Select your timezone
                 </option>
-                {countryTimeZones.map((country, index) => (
-                  <option key={index} value={country.abbreviation}>
-                    {country.country} ({country.abbreviation})
+                {countryTimeZones.map((tz, index) => (
+                  <option key={index} value={`${tz.country}|${tz.abbreviation}`}>
+                    {tz.country} ({tz.abbreviation})
                   </option>
                 ))}
               </select>
