@@ -3,6 +3,8 @@
 import { useState,useRef } from "react";
 import Packages from "./packages";
 import { saveAppointment } from "@/app/actions";
+import scrollToSection from "@/app/utils/scrollToSection";
+
 export default function Appointment() {
   const [name, setName] = useState("");
   const [fatherName, setFatherName] = useState("");
@@ -132,6 +134,7 @@ export default function Appointment() {
     try {
       const result = await saveAppointment(formData);
       setSubmitResult(result);
+      scrollToSection("appointments")
 
       if (result.success) {
         setName("");
