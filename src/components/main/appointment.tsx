@@ -157,6 +157,7 @@ export default function Appointment() {
         localStorage.removeItem("day");
         localStorage.removeItem("package");
         localStorage.removeItem("timezone");
+        localStorage.removeItem("selectedCountry");
 
         setTimeout(() => {
           setSubmitResult(null);
