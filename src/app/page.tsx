@@ -4,32 +4,28 @@ import Flags from "@/components/main/flags";
 import Information from "@/components/main/information";
 import Appointment from "@/components/main/appointment";
 import Seminars from "@/components/main/seminars";
-import Packages from "@/components/main/packages";
 import Profiles from "@/components/main/profiles";
 export default function Home() {
   return (
-    <div className="min-h-screen py-2">
-      <div className="flex gap-2 flex-col p-2 pr-4 md:grid  md:grid-cols-[70%_30%] md:gap-2">
+    <div className="min-h-screen py-2 max-w-[1400px] mx-auto px-4">
+      <div className="flex gap-2 flex-col  md:grid  md:grid-cols-[70%_30%] md:gap-2">
         <Carosul/>
         <Flags/>
       </div>
-      <div className="px-2 pt-2">
+      <div>
         <Information/>
       </div>
-      <div className="flex flex-col flex-col-reverse lg:flex-row lg:items-center  my-2">
+      <div className="flex flex-col-reverse lg:flex-row lg:items-center  my-2 gap-4">
         <div className="basis-[70%]">
-        <Appointment/>
+          <Appointment/>
         </div>
         <div className="basis-[30%]">
           <Seminars/>
         </div>
-    </div>
-    {/* <div>
-      <Packages/>
-    </div> */}
-    <div>
-      <Profiles/>
-    </div>
+      </div>
+      <div>
+        <Profiles/>
+      </div>
     </div>
   );
 }

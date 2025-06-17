@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import Packages from "./packages";
 import { saveAppointment } from "@/app/actions";
 export default function Appointment() {
-  // State variables for each form input
   const [name, setName] = useState("");
   const [fatherName, setFatherName] = useState("");
   const [city, setCity] = useState("");
@@ -17,25 +16,20 @@ export default function Appointment() {
   const [receiptFile, setReceiptFile] = useState<File | null>(null);
   const [receiptFileName, setReceiptFileName] = useState("");
 
-  // State for validation errors
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // State for form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{
     success?: boolean;
     message?: string;
   } | null>(null);
 
-  // Ref for packages component
   const packagesRef = useRef<{ resetPackagesState: () => void }>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Validate form fields
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    // Name validation with pattern
     if (!name.trim()) {
       newErrors.name = "Name is required";
     } else if (!/^[A-Za-z\s]{3,14}$/.test(name)) {
@@ -43,7 +37,6 @@ export default function Appointment() {
         "Name must be 3-14 characters and contain only letters and spaces";
     }
 
-    // Father's name validation
     if (!fatherName.trim()) {
       newErrors.fatherName = "Father's name is required";
     } else if (!/^[A-Za-z\s]{3,14}$/.test(fatherName)) {
@@ -51,7 +44,6 @@ export default function Appointment() {
         "Father's name must be 3-14 characters and contain only letters and spaces";
     }
 
-    // City validation
     if (!city.trim()) {
       newErrors.city = "City is required";
     } else if (!/^[A-Za-z\s]{3,14}$/.test(city)) {
@@ -59,7 +51,6 @@ export default function Appointment() {
         "City must be 3-14 characters and contain only letters and spaces";
     }
 
-    // Education validation
     if (!education.trim()) {
       newErrors.education = "Education is required";
     } else if (!/^[A-Za-z0-9\s\-\&]{3,30}$/.test(education)) {
@@ -67,7 +58,6 @@ export default function Appointment() {
         "Education can have alphabets, numbers, and special characters - & and spaces";
     }
 
-    // Last degree name validation
     if (!lastDegreeName.trim()) {
       newErrors.lastDegreeName = "Last degree name is required";
     } else if (!/^[A-Za-z0-9\s\-\&]{3,30}$/.test(lastDegreeName)) {
@@ -75,7 +65,6 @@ export default function Appointment() {
         "Last degree name can have alphabets, numbers, and special characters - & and spaces";
     }
 
-    // University validation
     if (!university.trim()) {
       newErrors.university = "University is required";
     } else if (!/^[A-Za-z0-9\s\-\&]{3,30}$/.test(university)) {
@@ -83,7 +72,6 @@ export default function Appointment() {
         "University can have alphabets, numbers, and special characters - & and spaces";
     }
 
-    // Scholarship country validation
     if (!scholarshipCountry.trim()) {
       newErrors.scholarshipCountry = "Scholarship country is required";
     } else if (!/^[A-Za-z0-9\s\-\&]{3,30}$/.test(scholarshipCountry)) {
@@ -91,24 +79,20 @@ export default function Appointment() {
         "Scholarship country can have alphabets, numbers, and special characters - & and spaces";
     }
 
-    // Level validation
     if (!levelFor) {
       newErrors.levelFor = "Please select a level";
     }
 
-    // Bank account number validation
     if (bankAccountNumber && !/^\d+$/.test(bankAccountNumber)) {
       newErrors.bankAccountNumber =
         "Bank account number must contain only digits";
     }
 
-    // Package validation
     const selectedPackage = localStorage.getItem("package");
     if (!selectedPackage) {
       newErrors.package = "Please select a package";
     }
 
-    // Timezone validation
     const selectedTimezone = localStorage.getItem("timezone");
     if (!selectedTimezone) {
       newErrors.timezone = "Please select a timezone";
@@ -118,13 +102,10 @@ export default function Appointment() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    // Validate form
     if (!validateForm()) {
-      // Scroll to the first error
       const firstErrorField = document.querySelector('[data-error="true"]');
       if (firstErrorField) {
         firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -134,7 +115,6 @@ export default function Appointment() {
 
     setIsSubmitting(true);
 
-    // Create an object with all form data
     const formData = {
       name,
       fatherName,
@@ -152,13 +132,10 @@ export default function Appointment() {
     };
 
     try {
-      // Call the server action
       const result = await saveAppointment(formData);
       setSubmitResult(result);
 
-      // If successful, reset the form
       if (result.success) {
-        // Reset all form states
         setName("");
         setFatherName("");
         setCity("");
@@ -171,22 +148,18 @@ export default function Appointment() {
         setReceiptFile(null);
         setReceiptFileName("");
 
-        // Reset file input
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
         }
 
-        // Reset packages component
         if (packagesRef.current) {
           packagesRef.current.resetPackagesState();
         }
 
-        // Clear localStorage
         localStorage.removeItem("day");
         localStorage.removeItem("package");
         localStorage.removeItem("timezone");
 
-        // Clear success message after 5 seconds
         setTimeout(() => {
           setSubmitResult(null);
         }, 5000);
@@ -204,13 +177,11 @@ export default function Appointment() {
     }
   }
 
-  // Handle file change
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
       const file = files[0];
 
-      // Validate file type (only images and PDFs)
       const validTypes = [
         "image/jpeg",
         "image/png",
@@ -226,7 +197,6 @@ export default function Appointment() {
         return;
       }
 
-      // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
         setErrors({
           ...errors,
@@ -238,7 +208,6 @@ export default function Appointment() {
       setReceiptFile(file);
       setReceiptFileName(file.name);
 
-      // Clear error if exists
       if (errors.confirmationReceipt) {
         const { confirmationReceipt, ...restErrors } = errors;
         setErrors(restErrors);
@@ -246,16 +215,13 @@ export default function Appointment() {
     }
   };
 
-  // Add this handler function for bank account number
   const handleBankAccountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    // Only allow up to 14 digits and ensure it's a positive number
     if (/^\d{0,14}$/.test(value)) {
       setBankAccountNumber(value);
     }
 
-    // Clear error if exists
     if (errors.bankAccountNumber) {
       const { bankAccountNumber, ...restErrors } = errors;
       setErrors(restErrors);
@@ -263,12 +229,11 @@ export default function Appointment() {
   };
 
   return (
-    <div id="appointments" className="max-w-4xl mx-auto p-6">
+    <div id="appointments" className="p-6">
       <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
         Register here, Book Appointment
       </h1>
 
-      {/* Show submission result message */}
       {submitResult && (
         <div
           className={`mb-6 p-4 rounded-md ${
@@ -281,7 +246,6 @@ export default function Appointment() {
         </div>
       )}
 
-      {/* Show package/timezone error if any */}
       {(errors.package || errors.timezone) && (
         <div className="mb-6 p-4 rounded-md bg-red-100 text-red-700">
           {errors.package && <p>{errors.package}</p>}
@@ -289,7 +253,6 @@ export default function Appointment() {
         </div>
       )}
 
-      {/* Form with onSubmit handler */}
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 sm:grid-cols-2 gap-4"
