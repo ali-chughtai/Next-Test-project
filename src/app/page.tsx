@@ -8,7 +8,7 @@ import Profiles from "@/components/main/profiles";
 export default function Home() {
   return (
     <div className="min-h-screen py-2 max-w-[1400px] mx-auto px-4">
-      <div className="flex gap-2 flex-col  md:grid  md:grid-cols-[70%_30%] md:gap-2">
+      <div className="flex gap-2 flex-col  md:grid  md:grid-cols-[70%_29.15%] md:gap-3">
         <Carosul/>
         <Flags/>
       </div>

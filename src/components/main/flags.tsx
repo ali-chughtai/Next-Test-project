@@ -22,7 +22,7 @@ export default function Flags() {
   }, []);
 
   return (
-    <div className="relative w-full rounded-lg md:bg-gradient-to-r md:from-[#e3e4e9] md:via-[#c6c8d2] md:to-[#9dabda]">
+    <div className="w-full rounded-lg md:bg-gradient-to-r md:from-[#e3e4e9] md:via-[#c6c8d2] md:to-[#9dabda]">
       <h2 className="text-xl font-bold text-center text-black md:text-white pt-2">
         Countries
       </h2>
