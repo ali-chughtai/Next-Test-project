@@ -1,5 +1,4 @@
 "use server"
-// import { revalidatePath } from 'next/cache';
 import { MongoClient } from 'mongodb';
 
 // Define the form data type
@@ -8,18 +7,18 @@ type AppointmentFormData = {
   fatherName: string;
   city: string;
   education: string;
-  lastDegreeName: string;
+  last_degree_Name: string;
   university: string;
-  scholarshipCountry: string;
-  levelFor: string;
-  bankAccountNumber: string;
-  confirmationReceipt: string;
+  scholarship_Country: string;
+  applied_For: string;
+  contact_Number: string;
+  email: string;
+  confirmation_receipt: string;
   appointment_day: string;
   package: string;
   timezone: string;
 };
 
-// Connect to MongoDB
 async function connectToDatabase() {
   if (!process.env.MONGODB_URI) {
     throw new Error('Please add your MongoDB URI to .env.local');
@@ -30,19 +29,15 @@ async function connectToDatabase() {
   return client.db(process.env.MONGODB_DB);
 }
 
-// Server action to save appointment
 export async function saveAppointment(formData: AppointmentFormData) {
   try {
     const db = await connectToDatabase();
     
-    // Insert the form data into the appointments collection
     const result = await db.collection('appointments').insertOne({
       ...formData,
       createdAt: new Date()
     });
     
-    // Revalidate the page to show updated data
-    // revalidatePath('/');
     
     return { 
       success: true, 

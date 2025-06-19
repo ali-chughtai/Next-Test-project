@@ -5,9 +5,7 @@ export default function Signature() {
     return(
         <div className="flex gap-3 items-center">
                 <Image src={headerImages.logo} alt="404" width={40} />
-                <p className="text-white font-bold text-xl">oppurtunityabroad.com</p>
+                <p className="text-white font-bold text-xl">oppurtunityabroad</p>
             </div>
     )
 }
-
-// w-[50%] md:w-[40%] pl-3

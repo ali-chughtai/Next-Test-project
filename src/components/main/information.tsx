@@ -28,7 +28,7 @@ export default function Information() {
     {
       title: "Scholarships Guidance",
       icon: informationImages.scholarshipsGuidance,
-      description: "DAAD (Germany, Oman), Wealth (UK) guidelines",
+      description: "DAAD, Germany, Commonwealth(UK) guidelines",
     },
     {
       title: "University Selection",

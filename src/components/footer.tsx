@@ -12,14 +12,9 @@ export default function footer() {
       <div className="text-white flex flex-col items-center justify-center text-center gap-1">
         <h1 className="text-lg font-semibold">Contact</h1>
         <ul className="flex flex-col gap-2 text-gray-300">
-          <li>1-703-555-567</li>
-          <li>
-          9290 Bond
-          Overland Park, KS 66214
-          </li>
           <li className="text-blue-400 hover:cursor-pointer">
-            <a href="#" target="_blank">
-              oppurtunityabroad.com
+            <a href="mailto:opportunityabroad@outlook.com" target="_blank">
+            opportunityabroad@outlook.com
             </a>
           </li>
         </ul>

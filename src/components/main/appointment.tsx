@@ -14,9 +14,10 @@ export default function Appointment() {
   const [university, setUniversity] = useState("");
   const [scholarshipCountry, setScholarshipCountry] = useState("");
   const [levelFor, setLevelFor] = useState("");
-  const [bankAccountNumber, setBankAccountNumber] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
   const [receiptFile, setReceiptFile] = useState<File | null>(null);
   const [receiptFileName, setReceiptFileName] = useState("");
+  const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{
@@ -83,9 +84,16 @@ export default function Appointment() {
       newErrors.levelFor = "Please select a level";
     }
 
-    if (bankAccountNumber && !/^\d+$/.test(bankAccountNumber)) {
-      newErrors.bankAccountNumber =
-        "Bank account number must contain only digits";
+    if (!contactNumber) {
+      newErrors.contactNumber = "Contact number is required";
+    } else if (!/^\d{10,15}$/.test(contactNumber)) {
+      newErrors.contactNumber = "Contact number must be 10-15 digits";
+    }
+
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Please enter a valid email address";
     }
 
     const selectedPackage = localStorage.getItem("package");
@@ -124,7 +132,8 @@ export default function Appointment() {
       university,
       scholarshipCountry,
       levelFor,
-      bankAccountNumber,
+      contactNumber,
+      email,
       confirmationReceipt: receiptFileName,
       appointment_day: localStorage.getItem("day") || "Saturday",
       package: localStorage.getItem("package") || "",
@@ -145,7 +154,8 @@ export default function Appointment() {
         setUniversity("");
         setScholarshipCountry("");
         setLevelFor("");
-        setBankAccountNumber("");
+        setContactNumber("");
+        setEmail("");
         setReceiptFile(null);
         setReceiptFileName("");
 
@@ -217,15 +227,15 @@ export default function Appointment() {
     }
   };
 
-  const handleBankAccountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleContactNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (/^\d{0,14}$/.test(value)) {
-      setBankAccountNumber(value);
+    if (/^\d{0,15}$/.test(value)) {
+      setContactNumber(value);
     }
 
-    if (errors.bankAccountNumber) {
-      const { bankAccountNumber, ...restErrors } = errors;
+    if (errors.contactNumber) {
+      const { contactNumber, ...restErrors } = errors;
       setErrors(restErrors);
     }
   };
@@ -515,23 +525,48 @@ export default function Appointment() {
           <input
             type="text"
             inputMode="numeric"
-            name="bank-account-number"
-            placeholder="Bank Account # (digits only)"
-            value={bankAccountNumber}
-            onChange={handleBankAccountChange}
+            name="contact-number"
+            placeholder="Contact Number *"
+            value={contactNumber}
+            onChange={handleContactNumberChange}
             className={`w-full px-4 py-2 border text-black placeholder:text-gray-300 placeholder:text-center text-center md:text-left md:placeholder:text-left border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-              errors.bankAccountNumber ? "border-red-500" : ""
+              errors.contactNumber ? "border-red-500" : ""
             }`}
-            data-error={errors.bankAccountNumber ? "true" : "false"}
+            data-error={errors.contactNumber ? "true" : "false"}
+            required
           />
-          {errors.bankAccountNumber && (
+          {errors.contactNumber && (
             <p className="text-red-500 text-xs mt-1">
-              {errors.bankAccountNumber}
+              {errors.contactNumber}
             </p>
           )}
         </div>
 
         <div className="relative">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address *"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (errors.email) {
+                const { email, ...restErrors } = errors;
+                setErrors(restErrors);
+              }
+            }}
+            className={`w-full px-4 py-2 border text-black placeholder:text-gray-300 placeholder:text-center text-center md:text-left md:placeholder:text-left border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              errors.email ? "border-red-500" : ""
+            }`}
+            data-error={errors.email ? "true" : "false"}
+            required
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
+        <div className="relative sm:col-span-2">
           <div
             className={`relative border ${
               errors.confirmationReceipt ? "border-red-500" : "border-gray-300"
