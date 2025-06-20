@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 export default function Carousel() {
   const slides = [
-    "You can change the country, we take you there through study routes.",
+    "You choose country, we take you there through study routes.",
     "Success often offers friendship to those who answer when opportunity knocks at their door.",
   ];
 
