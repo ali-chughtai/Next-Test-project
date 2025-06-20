@@ -6,8 +6,8 @@ import Layout from '@/components/layout'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'My Next.js App',
-  description: 'Created with Next.js and Tailwind CSS',
+  title: 'Opportunity Abroad',
+  // description: 'Created with Next.js and Tailwind CSS',
 }
 
 export default function RootLayout({
