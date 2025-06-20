@@ -74,6 +74,7 @@ export default function Carousel() {
               
               <blockquote className="text-sm sm:text-base md:text-xl lg:text-2xl font-medium leading-relaxed text-transparent bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text">
                 "{slides[currentSlide]}"
+                  <p className="text-xs md:text-sm text-gray-600 italic text-center"> - Arwish.S</p>
               </blockquote>
               
               <div className="mt-2 sm:mt-3 md:mt-4 lg:mt-6 w-10 sm:w-16 md:w-20 lg:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto"></div>
