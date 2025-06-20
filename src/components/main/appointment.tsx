@@ -586,7 +586,7 @@ export default function Appointment() {
                 {receiptFileName ? (
                   receiptFileName
                 ) : (
-                  <span className="text-gray-400">Upload Payment Receipt</span>
+                  <span className="text-gray-400">Upload Payment Receipt *</span>
                 )}
               </div>
               <button
