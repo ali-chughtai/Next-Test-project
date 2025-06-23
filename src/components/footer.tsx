@@ -13,8 +13,8 @@ export default function footer() {
         <h1 className="text-lg font-semibold">Contact</h1>
         <ul className="flex flex-col gap-2 text-gray-300">
           <li className="text-blue-400 hover:cursor-pointer">
-            <a href="mailto:opportunityabroad@outlook.com" target="_blank">
-            opportunityabroad@outlook.com
+            <a href="mailto:opportunity_abroad@outlook.com" target="_blank">
+            opportunity_abroad@outlook.com
             </a>
           </li>
         </ul>
