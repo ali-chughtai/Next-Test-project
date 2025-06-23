@@ -7,13 +7,13 @@ type AppointmentFormData = {
   fatherName: string;
   city: string;
   education: string;
-  last_degree_Name: string;
+  lastDegreeName: string;
   university: string;
-  scholarship_Country: string;
-  applied_For: string;
-  contact_Number: string;
+  scholarshipCountry: string;
+  levelFor: string;
+  contactNumber: string;
   email: string;
-  confirmation_receipt: string;
+  confirmationReceipt: string;
   appointment_day: string;
   package: string;
   timezone: string;
