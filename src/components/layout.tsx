@@ -1,4 +1,3 @@
-// src/components/Layout.tsx
 import { ReactNode } from 'react'
 import Header from './header'
 import Footer from './footer'
@@ -9,9 +8,11 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main>{children}</main> 
+      <main className="flex-1">
+        {children}
+      </main>
       <Footer />
     </div>
   )

@@ -2,7 +2,6 @@
 
 import { useState,useRef } from "react";
 import Packages from "./packages";
-import { saveAppointment } from "@/app/actions";
 import scrollToSection from "@/app/utils/scrollToSection";
 
 export default function Appointment() {
@@ -134,17 +133,27 @@ export default function Appointment() {
       levelFor,
       contactNumber,
       email,
-      confirmationReceipt: receiptFileName,
+      confirmationReceipt: receiptFile
+        ? Buffer.from(await receiptFile.arrayBuffer())
+        : null,
       appointment_day: localStorage.getItem("day") || "Saturday",
       package: localStorage.getItem("package") || "",
       timezone: localStorage.getItem("timezone") || "",
     };
-
+  
     try {
-      const result = await saveAppointment(formData);
+      const response = await fetch('/api/appointments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const result = await response.json();
       setSubmitResult(result);
-      scrollToSection("appointments")
-
+      scrollToSection("appointments");
+  
       if (result.success) {
         setName("");
         setFatherName("");
@@ -171,7 +180,8 @@ export default function Appointment() {
         localStorage.removeItem("package");
         localStorage.removeItem("timezone");
         localStorage.removeItem("selectedCountry");
-
+        localStorage.removeItem("timezoneCountry");
+  
         setTimeout(() => {
           setSubmitResult(null);
         }, 5000);
@@ -179,10 +189,7 @@ export default function Appointment() {
     } catch (error) {
       setSubmitResult({
         success: false,
-        message:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred",
+        message: error instanceof Error ? error.message : "An unexpected error occurred",
       });
     } finally {
       setIsSubmitting(false);
@@ -194,17 +201,11 @@ export default function Appointment() {
     if (files && files.length > 0) {
       const file = files[0];
 
-      const validTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/gif",
-        "application/pdf",
-      ];
+      const validTypes = ["image/jpeg", "image/png", "image/gif", "application/pdf"];
       if (!validTypes.includes(file.type)) {
         setErrors({
           ...errors,
-          confirmationReceipt:
-            "Please upload an image (JPEG, PNG, GIF) or PDF file",
+          confirmationReceipt: "Please upload an image (JPEG, PNG, GIF) or PDF file",
         });
         return;
       }
