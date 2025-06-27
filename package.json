@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@heroui/react": "^2.7.10",
     "bcrypt": "^6.0.0",
     "jsonwebtoken": "^9.0.2",

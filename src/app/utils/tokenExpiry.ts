@@ -1,7 +1,10 @@
 import jwt from "jsonwebtoken";
 
-export default function isTokenExpired(token: string): boolean {
+export default function isTokenExpired(token: string | null): boolean {
   try {
+    if(!token){
+        return true;
+    }
     const decoded = jwt.decode(token) as { exp: number } | null;
 
     if (!decoded || !decoded.exp) {

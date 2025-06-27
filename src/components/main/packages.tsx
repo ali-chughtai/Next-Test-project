@@ -18,24 +18,75 @@ const Packages = forwardRef<PackagesRef>((props, ref) => {
     { country: "Italy", timeZone: "Europe/Rome", abbreviation: "CET/CEST" },
     { country: "Germany", timeZone: "Europe/Berlin", abbreviation: "CET/CEST" },
     { country: "Canada", timeZone: "America/Toronto", abbreviation: "EST/EDT" },
-    {
-      country: "Argentina",
-      timeZone: "America/Argentina/Buenos_Aires",
-      abbreviation: "ART",
-    },
-    {
-      country: "United Kingdom",
-      timeZone: "Europe/London",
-      abbreviation: "GMT/BST",
-    },
-    {
-      country: "United States",
-      timeZone: "America/New_York",
-      abbreviation: "EST/EDT",
-    },
+    { country: "Argentina", timeZone: "America/Argentina/Buenos_Aires", abbreviation: "ART" },
+    { country: "United Kingdom", timeZone: "Europe/London", abbreviation: "GMT/BST" },
+    { country: "United States", timeZone: "America/New_York", abbreviation: "EST/EDT" },
     { country: "France", timeZone: "Europe/Paris", abbreviation: "CET/CEST" },
     { country: "South Korea", timeZone: "Asia/Seoul", abbreviation: "KST" },
+    { country: "Japan", timeZone: "Asia/Tokyo", abbreviation: "JST" },
+    { country: "China", timeZone: "Asia/Shanghai", abbreviation: "CST" },
+    { country: "India", timeZone: "Asia/Kolkata", abbreviation: "IST" },
+    { country: "Australia", timeZone: "Australia/Sydney", abbreviation: "AEST/AEDT" },
+    { country: "Brazil", timeZone: "America/Sao_Paulo", abbreviation: "BRT/BRST" },
+    { country: "Mexico", timeZone: "America/Mexico_City", abbreviation: "CST/CDT" },
+    { country: "South Africa", timeZone: "Africa/Johannesburg", abbreviation: "SAST" },
+    { country: "Egypt", timeZone: "Africa/Cairo", abbreviation: "EET/EEST" },
+    { country: "Nigeria", timeZone: "Africa/Lagos", abbreviation: "WAT" },
+    { country: "Russia", timeZone: "Europe/Moscow", abbreviation: "MSK" },
+    { country: "Saudi Arabia", timeZone: "Asia/Riyadh", abbreviation: "AST" },
+    { country: "United Arab Emirates", timeZone: "Asia/Dubai", abbreviation: "GST" },
+    { country: "New Zealand", timeZone: "Pacific/Auckland", abbreviation: "NZST/NZDT" },
+    { country: "Spain", timeZone: "Europe/Madrid", abbreviation: "CET/CEST" },
+    { country: "Sweden", timeZone: "Europe/Stockholm", abbreviation: "CET/CEST" },
+    { country: "Norway", timeZone: "Europe/Oslo", abbreviation: "CET/CEST" },
+    { country: "Denmark", timeZone: "Europe/Copenhagen", abbreviation: "CET/CEST" },
+    { country: "Netherlands", timeZone: "Europe/Amsterdam", abbreviation: "CET/CEST" },
+    { country: "Belgium", timeZone: "Europe/Brussels", abbreviation: "CET/CEST" },
+    { country: "Switzerland", timeZone: "Europe/Zurich", abbreviation: "CET/CEST" },
+    { country: "Austria", timeZone: "Europe/Vienna", abbreviation: "CET/CEST" },
+    { country: "Poland", timeZone: "Europe/Warsaw", abbreviation: "CET/CEST" },
+    { country: "Greece", timeZone: "Europe/Athens", abbreviation: "EET/EEST" },
+    { country: "Turkey", timeZone: "Europe/Istanbul", abbreviation: "TRT" },
+    { country: "Thailand", timeZone: "Asia/Bangkok", abbreviation: "ICT" },
+    { country: "Singapore", timeZone: "Asia/Singapore", abbreviation: "SGT" },
+    { country: "Indonesia", timeZone: "Asia/Jakarta", abbreviation: "WIB" },
+    { country: "Philippines", timeZone: "Asia/Manila", abbreviation: "PHT" },
+    { country: "Vietnam", timeZone: "Asia/Ho_Chi_Minh", abbreviation: "ICT" },
+    { country: "Malaysia", timeZone: "Asia/Kuala_Lumpur", abbreviation: "MYT" },
+    { country: "Pakistan", timeZone: "Asia/Karachi", abbreviation: "PKT" },
+    { country: "Bangladesh", timeZone: "Asia/Dhaka", abbreviation: "BST" },
+    { country: "Iran", timeZone: "Asia/Tehran", abbreviation: "IRST/IRDT" },
+    { country: "Israel", timeZone: "Asia/Jerusalem", abbreviation: "IST/IDT" },
+    { country: "Kenya", timeZone: "Africa/Nairobi", abbreviation: "EAT" },
+    { country: "Morocco", timeZone: "Africa/Casablanca", abbreviation: "WET/WEST" },
+    { country: "Chile", timeZone: "America/Santiago", abbreviation: "CLT/CLST" },
+    { country: "Colombia", timeZone: "America/Bogota", abbreviation: "COT" },
+    { country: "Peru", timeZone: "America/Lima", abbreviation: "PET" },
+    { country: "Venezuela", timeZone: "America/Caracas", abbreviation: "VET" },
+    { country: "South Africa", timeZone: "Africa/Johannesburg", abbreviation: "SAST" },
+    { country: "Egypt", timeZone: "Africa/Cairo", abbreviation: "EET/EEST" },
+    { country: "Norway", timeZone: "Europe/Oslo", abbreviation: "CET/CEST" },
+    { country: "Sweden", timeZone: "Europe/Stockholm", abbreviation: "CET/CEST" },
+    { country: "Finland", timeZone: "Europe/Helsinki", abbreviation: "EET/EEST" },
+    { country: "Ireland", timeZone: "Europe/Dublin", abbreviation: "GMT/IST" },
+    { country: "Portugal", timeZone: "Europe/Lisbon", abbreviation: "WET/WEST" },
+    { country: "Czech Republic", timeZone: "Europe/Prague", abbreviation: "CET/CEST" },
+    { country: "Hungary", timeZone: "Europe/Budapest", abbreviation: "CET/CEST" },
+    { country: "Romania", timeZone: "Europe/Bucharest", abbreviation: "EET/EEST" },
+    { country: "Ukraine", timeZone: "Europe/Kiev", abbreviation: "EET/EEST" },
+    { country: "Argentina", timeZone: "America/Argentina/Buenos_Aires", abbreviation: "ART" },
+    { country: "Chile", timeZone: "America/Santiago", abbreviation: "CLT/CLST" },
+    { country: "New Zealand", timeZone: "Pacific/Auckland", abbreviation: "NZST/NZDT" },
+    { country: "Fiji", timeZone: "Pacific/Fiji", abbreviation: "FJT/FJST" },
+    { country: "Papua New Guinea", timeZone: "Pacific/Port_Moresby", abbreviation: "PGT" },
+    { country: "United States (Pacific)", timeZone: "America/Los_Angeles", abbreviation: "PST/PDT" },
+    { country: "United States (Mountain)", timeZone: "America/Denver", abbreviation: "MST/MDT" },
+    { country: "United States (Central)", timeZone: "America/Chicago", abbreviation: "CST/CDT" },
+    { country: "United States (Arizona)", timeZone: "America/Phoenix", abbreviation: "MST" },
+    { country: "United States (Alaska)", timeZone: "America/Anchorage", abbreviation: "AKST/AKDT" },
+    { country: "United States (Hawaii)", timeZone: "Pacific/Honolulu", abbreviation: "HST" },
   ];
+  
 
   useEffect(() => {
     const storedPackage = localStorage.getItem("package");
@@ -49,6 +100,9 @@ const Packages = forwardRef<PackagesRef>((props, ref) => {
     if (storedCountry && storedTimezone) {
       setSelectedCountry(storedCountry);
       setSelectedTimezone(storedTimezone);
+    } else {
+      setSelectedCountry("");
+      setSelectedTimezone("");
     }
   }, []);
 
@@ -157,9 +211,9 @@ const Packages = forwardRef<PackagesRef>((props, ref) => {
             <div className="relative w-full md:w-auto">
               <select
                 id="timezone-select"
-                value={`${selectedCountry}|${selectedTimezone}`}
+                value={selectedCountry && selectedTimezone ? `${selectedCountry}|${selectedTimezone}` : ""}
                 onChange={(e) => {
-                  const [country, timezone] = e.target.value.split('|');
+                  const [country, timezone] = e.target.value.split("|");
                   setSelectedCountry(country);
                   setSelectedTimezone(timezone);
                   localStorage.setItem("selectedCountry", country);
