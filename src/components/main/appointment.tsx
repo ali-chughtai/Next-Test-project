@@ -3,6 +3,7 @@
 import { useState,useRef } from "react";
 import Packages from "./packages";
 import scrollToSection from "@/app/utils/scrollToSection";
+import sendEmails from "../email/sendEmail";
 
 export default function Appointment() {
   const [name, setName] = useState("");
@@ -105,6 +106,10 @@ export default function Appointment() {
       newErrors.timezone = "Please select a timezone";
     }
 
+    if (!receiptFile) {
+      newErrors.confirmationReceipt = "Payment receipt is required";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -151,10 +156,23 @@ export default function Appointment() {
       });
   
       const result = await response.json();
-      setSubmitResult(result);
-      scrollToSection("appointments");
-  
+
       if (result.success) {
+        try {
+          await sendEmails(formData);
+          setSubmitResult({
+            success: true,
+            message:
+              "Application submitted successfully! You will receive a confirmation email shortly.",
+          });
+        } catch (emailError) {
+          setSubmitResult({
+            success: true,
+            message:
+              "Application submitted successfully! However, there was an issue sending the confirmation email. We will contact you directly.",
+          });
+        }
+
         setName("");
         setFatherName("");
         setCity("");
@@ -181,15 +199,22 @@ export default function Appointment() {
         localStorage.removeItem("timezone");
         localStorage.removeItem("selectedCountry");
         localStorage.removeItem("timezoneCountry");
-  
+
+        scrollToSection("appointments");
+
         setTimeout(() => {
           setSubmitResult(null);
-        }, 5000);
+        }, 8000);
+      } else {
+        setSubmitResult(result);
       }
     } catch (error) {
       setSubmitResult({
         success: false,
-        message: error instanceof Error ? error.message : "An unexpected error occurred",
+        message:
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred",
       });
     } finally {
       setIsSubmitting(false);
@@ -201,11 +226,16 @@ export default function Appointment() {
     if (files && files.length > 0) {
       const file = files[0];
 
-      const validTypes = ["image/jpeg", "image/png", "image/gif", "application/pdf"];
+      const validTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+      ];
       if (!validTypes.includes(file.type)) {
         setErrors({
           ...errors,
-          confirmationReceipt: "Please upload an image (JPEG, PNG, GIF) or PDF file",
+          confirmationReceipt:
+            "Please upload an image (JPEG, PNG, GIF)",
         });
         return;
       }
@@ -228,7 +258,9 @@ export default function Appointment() {
     }
   };
 
-  const handleContactNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleContactNumberChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
 
     if (/^\d{0,15}$/.test(value)) {
@@ -515,7 +547,7 @@ export default function Appointment() {
               Level For *
             </option>
             <option value="masters">Masters</option>
-            <option value="phd">PhD</option>
+            <option value="phd">PHD</option>
           </select>
           {errors.levelFor && (
             <p className="text-red-500 text-xs mt-1">{errors.levelFor}</p>
@@ -537,9 +569,7 @@ export default function Appointment() {
             required
           />
           {errors.contactNumber && (
-            <p className="text-red-500 text-xs mt-1">
-              {errors.contactNumber}
-            </p>
+            <p className="text-red-500 text-xs mt-1">{errors.contactNumber}</p>
           )}
         </div>
 
@@ -593,7 +623,9 @@ export default function Appointment() {
               <button
                 type="button"
                 className="ml-2 bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded text-sm"
-                onClick={() => document.getElementById("receipt-file")?.click()}
+                onClick={() =>
+                  document.getElementById("receipt-file")?.click()
+                }
               >
                 Browse
               </button>

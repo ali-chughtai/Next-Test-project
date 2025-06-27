@@ -31,7 +31,6 @@ export default function AdminLogin() {
       const result = await response.json();
 
       if (response.ok) {
-        console.log("Login successful:", result);
         localStorage.setItem("token", result.token);
         router.push("/admin/dashboard");
       } else {

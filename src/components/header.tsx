@@ -7,9 +7,18 @@ import Drawer from "./main/drawer";
 import { useState, useEffect } from "react";
 import Signature from "./signature/signature";
 import scrollToSection from "@/app/utils/scrollToSection";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
     const [drawerOpen, setDrawerOpen] = useState(false)
+    const [adminRoute, setAdminRoute] = useState(false); 
+    const router = useRouter();
+    const pathname = usePathname();
+
+    useEffect(()=>{
+        setAdminRoute(pathname.includes("admin") && !pathname.includes("login"))
+    },[pathname])
+
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen)
     }
@@ -33,6 +42,7 @@ export default function Header() {
             <div className="pl-3">
             <Signature/>
             </div>
+                {!adminRoute ? 
             <div className="  hidden w-[60%] justify-end gap-10 text-md font-semibold text-white py-2 px-2 md:flex"> 
                 <Link className= "hover:underline" 
                 onClick={() => scrollToSection('services')}
@@ -46,6 +56,11 @@ export default function Header() {
                 onClick={() => scrollToSection('footer')}
                 href="">Contact us</Link>
             </div>
+               : <Link 
+               className="text-md font-semibold text-white pr-4"
+               onClick={()=>localStorage.removeItem("token")}
+               href={"/admin/login"}>Signout</Link>
+                }
             <div className="md:hidden pr-2">
                 { drawerOpen ? 
                     <Image 

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { connectToDatabase } from "@/app/utils/databaseConnectionClient";
 
 type Signup = {
@@ -33,14 +32,9 @@ export async function POST(request: NextRequest) {
 
     const dbuser = await db.collection("admins").insertOne(newUser);
 
-    const token = jwt.sign({ id: dbuser.insertedId, email: newUser.email, name: newUser.name }, process.env.JWT_SECRET!, {
-      expiresIn: "1h",
-    });
-
     return NextResponse.json({
       success: true,
       message: "Signup successful",
-      token,
     });
   } catch (error) {
     console.error("Error:", error);
