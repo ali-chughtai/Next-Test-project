@@ -8,26 +8,30 @@ type Login = {
   password: string;
 };
 
-; 
 export async function POST(request: NextRequest) {
   try {
     const db = await connectToDatabase();
     const req: Login = await request.json();
 
-    const { email, password } = req; 
-    console.log(`Email ${email} and ${password}`)
+    const { email, password } = req;
 
     const admin = await db.collection("admins").findOne({ email });
 
     if (!admin) {
-      return NextResponse.json({ success: false, message: "Admin not found" });
+      return NextResponse.json(
+        { success: false, message: "Invalid credentials" },
+        { status: 401 } 
+      );
     }
 
 
     const isPasswordValid = await bcrypt.compare(password, admin.password);
 
     if (!isPasswordValid) {
-      return NextResponse.json({ success: false, message: "Invalid credentials" });
+      return NextResponse.json(
+        { success: false, message: "Invalid credentials" },
+        { status: 401 } 
+      );
     }
 
     const token = jwt.sign(
@@ -42,6 +46,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Error:", error);
-    return NextResponse.json({ success: false, message: "Internal server error" });
+    return NextResponse.json(
+      { success: false, message: "Internal server error" },
+      { status: 500 } 
+    );
   }
 }

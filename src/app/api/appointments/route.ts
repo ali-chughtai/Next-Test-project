@@ -72,8 +72,8 @@ export async function GET(request: NextRequest) {
         return NextResponse.json(appointment);
       }
   
-      const allAppointments = await db.collection("appointments").find().toArray();
-      const processedAppointments = allAppointments.map((appointment) => {
+      const allAppointments = await db.collection("appointments").find({}, { projection: { confirmationReceipt: 0 } }).toArray();
+            const processedAppointments = allAppointments.map((appointment) => {
         if (appointment.confirmationReceipt && appointment.confirmationReceipt.data) {
             appointment.confirmationReceipt = Buffer.from(appointment.confirmationReceipt.data).toString('base64');
         } else {

@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Eye, EyeOff, Lock, Mail, Shield, AlertCircle } from "lucide-react";
+import Loader from "@/components/global/loadingSpinner";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ export default function AdminLogin() {
     setError("");
 
     try {
-      const response = await fetch("/api/admins", {
+      const response = await fetch("/api/admins/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +126,7 @@ export default function AdminLogin() {
             >
               {isLoading ? (
                 <div className="flex items-center justify-center gap-2">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <Loader/>
                   <span>Signing In...</span>
                 </div>
               ) : (
