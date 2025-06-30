@@ -28,6 +28,7 @@ export default function AdminDashboard() {
   const [appointments, setAppointments] = useState<Appointment[]>();
   const [selectedAppointment, setSelectedAppointment] =
     useState<Appointment | null>(null);
+  const [shouldRefetch, setShouldRefetch] = useState<Boolean>(false);  
   const router = useRouter();
 
   useEffect(() => {
@@ -70,9 +71,12 @@ export default function AdminDashboard() {
       }
     }
 
-    fetchAllAppointments();
-  }, [router]);
-
+    if (shouldRefetch || appointments === undefined) {
+      setAppointments(undefined);
+      fetchAllAppointments();
+      setShouldRefetch(false); 
+    }
+  }, [shouldRefetch, appointments, router]); 
   if (!appointments) {
     return <p className="text-black">Loading...</p>;
   }
@@ -143,19 +147,7 @@ export default function AdminDashboard() {
                         <span className="text-gray-600">Contact:</span>{" "}
                         {appointment.contactNumber}
                       </div>
-                      {appointment.confirmationReceipt && (
-                        <div className="flex items-center gap-2">
-                          <p className="text-gray-600 text-sm">Receipt:</p>
-                          <img
-                            src={`data:image/jpeg;base64,${appointment.confirmationReceipt}`}
-                            alt="Receipt"
-                            className="w-8 h-8 object-cover border border-gray-300 rounded"
-                            onError={(e) => {
-                              e.currentTarget.src = `data:image/png;base64,${appointment.confirmationReceipt}`;
-                            }}
-                          />
-                        </div>
-                      )}
+                      
                     </div>
                   </div>
                 ))}
@@ -201,9 +193,6 @@ export default function AdminDashboard() {
                         </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Timezone
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Receipt
                         </th>
                       </tr>
                     </thead>
@@ -258,22 +247,6 @@ export default function AdminDashboard() {
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                             {appointment.timezone}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {appointment.confirmationReceipt ? (
-                              <img
-                                src={`data:image/jpeg;base64,${appointment.confirmationReceipt}`}
-                                alt="Receipt"
-                                className="w-10 h-10 object-cover border border-gray-300 rounded"
-                                onError={(e) => {
-                                  e.currentTarget.src = `data:image/png;base64,${appointment.confirmationReceipt}`;
-                                }}
-                              />
-                            ) : (
-                              <span className="text-red-500 text-xs">
-                                No receipt
-                              </span>
-                            )}
-                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -289,6 +262,7 @@ export default function AdminDashboard() {
             <SingleAppointment
               appointment={selectedAppointment}
               onBack={() => setSelectedAppointment(null)}
+              deleteTrigger={()=>setShouldRefetch(true)}
             />
           )}
         </div>
